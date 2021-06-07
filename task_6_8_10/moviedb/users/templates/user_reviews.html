@@ -1,0 +1,19 @@
+{% extends 'templates/base.html' %}
+
+{% block title %}
+    My Reviews
+{% endblock %}
+
+{% block content %}
+    
+    {% if reviews %}
+        <h3 style="padding-top:20px;">Reviews</h3>
+        {% for review in reviews %}
+            <h6>{{ forloop.counter }}. {{review.movie}} {{ review.pub_date }}</h6>
+            <p>{{ review.text }}</p>
+        {% endfor %}
+    {% else %}
+        <h3 style="padding-top:20px;">No reviews are available</h3>
+    {% endif %}
+
+{% endblock %}

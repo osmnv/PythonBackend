@@ -1,0 +1,37 @@
+{% extends 'templates/base.html' %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title%}
+    Edit Movie  
+{% endblock %}
+
+
+{% block content%}
+
+    <h1 class="text-center" style="padding-top:20px;">{{ movie }}</h1>
+
+    <form method="POST"
+          enctype="multipart/form-data"
+          class="form-horizontal"
+          action="{% url 'movies:edit_movie' movie.id %}">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" 
+                class="btn btn-success btn-lg">
+                    Save
+                </button>
+    </form>
+
+    <form method="POST" action="{% url 'movies:delete_movie' movie.id %}">
+        {% csrf_token %}
+        <button href=""
+                type="submit"
+                class="btn btn-danger btn-lg">
+                    Delete
+            </button>
+    </form>
+
+{% endblock %}

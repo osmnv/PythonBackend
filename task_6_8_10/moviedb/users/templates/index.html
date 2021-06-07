@@ -1,0 +1,25 @@
+{% extends 'templates/base.html' %}
+
+{% block title%}
+    Movies
+{% endblock %}
+
+
+{% block content%}
+
+    <!-- Users list -->
+    {% if users_list %}
+        <nav class="nav flex-column" style="padding-left:50px;padding-top:50px;">
+        {% for user in users_list %}
+            <a class="nav-link" href="{% url 'users:user_details' user.id %}">
+                {{ forloop.counter }}. {{ user }}
+            </a>
+        {% endfor %}
+        </nav>
+    {% else %}
+        <p class="text-center" style="padding-top:150px;font-size:50px;">
+            No users are available!
+        </p>
+    {% endif %}
+
+{% endblock %}

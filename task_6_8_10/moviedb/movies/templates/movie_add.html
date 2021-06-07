@@ -1,0 +1,22 @@
+{% extends 'templates/base.html' %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{% block title%}
+    Add Movie
+{% endblock %}
+
+
+{% block content%}
+
+    <h1 class="text-center" style="padding-top:20px;">Add Movie</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-success btn-lg">Save</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+            <title>{% block title%}MovieDB{% endblock %}</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand">MovieDB</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'movies:movies_index' %}">Movies</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'users:users_index' %}">Users</a>
+                  </li>
+                  {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link active" aria-current="page" href="{% url 'users:user_reviews' user.id%}">My Reviews</a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </div>
+              <form method="GET" action="{% url 'movies:movies_index' %}" class="d-flex">
+                {% csrf_token %}
+                <input class="form-control me-2" type="search" name="search_query" placeholder="Search for movies">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+              {% if user.is_authenticated %}
+                <button class="btn btn-danger btn-lg center-block">
+                  <a href="{% url 'logout' %}">Logout</a>
+                </button>
+              {% else %}
+                <button class="btn btn-danger btn-lg center-block">
+                  <a href="{% url 'users:login' %}">Login</a>
+                </button>
+              {% endif %}
+            </div>
+          </nav>
+
+        {% block content %}
+        {% endblock %}
+        
+    </body>
+</html>

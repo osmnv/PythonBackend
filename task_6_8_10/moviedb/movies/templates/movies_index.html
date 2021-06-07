@@ -1,0 +1,44 @@
+{% extends 'templates/base.html' %}
+
+{% block title%}
+    Movies
+{% endblock %}
+
+
+{% block content%}
+
+    {% if user.is_authenticated %}
+        <h6>You are logged in as {{ user.username }}</h6>
+    {% endif %}
+
+    <!-- Movies list -->
+    {% if movies_list %}
+        <nav class="nav flex-column" style="padding-left:50px;padding-top:50px;">
+        {% for movie in movies_list %}
+            <a class="nav-link" href="{% url 'movies:movie_details' movie.id %}">
+                {{ forloop.counter }}. {{ movie }}
+            </a>
+        {% endfor %}
+        </nav>
+    {% else %}
+        <p class="text-center" style="padding-top:150px;font-size:50px;">
+            No movies are available!
+        </p>
+    {% endif %}
+    
+    {% if user.is_staff %}
+    <!-- 'Add movie' button -->
+    <div class="row">
+        <div class="col-sm-12" style="padding-left: 80px;padding-top: 20px;">
+            <form method="GET" action="{% url 'movies:add_movie' %}">
+                <button href=""
+                        type="submit"
+                        class="btn btn-success btn-lg center-block">
+                            Add
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock %}

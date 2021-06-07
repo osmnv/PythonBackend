@@ -1,0 +1,30 @@
+{% extends 'templates/base.html' %}
+
+{% block title%}
+    User {{ customuser }}
+{% endblock %}
+
+
+{% block content%}
+
+    <h1 class="text-center" style="padding-top:20px;">User {{ customuser }}</h1>
+
+    <!-- User info table -->
+    <dl class="row" style="padding-top: 100px;padding-left: 50px;padding-right: 50px;">
+        <dt class="col-sm-3">First name</dt>
+        <dd class="col-sm-9">{{ customuser.first_name }}</dd>
+
+        <dt class="col-sm-3">Last name</dt>
+        <dd class="col-sm-9">{{ customuser.last_name }}</dd>
+      
+        <dt class="col-sm-3">Personal info</dt>
+        <dd class="col-sm-9">{{ customuser.info }}</dd>
+      
+        <dt class="col-sm-3">Birth date</dt>
+        <dd class="col-sm-9">{{ customuser.birth_date }}</dd>
+
+        <dt class="col-sm-3">Joined at</dt>
+        <dd class="col-sm-9">{{ customuser.joined_at }}</dd>
+      </dl>
+
+{% endblock %}
